@@ -1,0 +1,78 @@
+---
+- name: "EP3 - Aprovisionamiento Router Corporativo"
+  hosts: routers
+  gather_facts: false
+  vars_files:
+    - ../vars/vars_001V-02.yaml
+
+  tasks:
+
+    - name: "Respaldar configuracion actual (show running-config)"
+      cisco.ios.ios_command:
+        commands:
+          - show running-config
+      register: backup_output
+
+    - name: "Guardar respaldo en archivo"
+      ansible.builtin.copy:
+        content: "{{ backup_output.stdout[0] }}"
+        dest: "respaldo/backup_001V-02.cfg"
+      delegate_to: localhost
+
+    - name: "Habilitar NETCONF (netconf-yang)"
+      cisco.ios.ios_config:
+        lines:
+          - netconf-yang
+
+    - name: "Habilitar RESTCONF"
+      cisco.ios.ios_config:
+        lines:
+          - restconf
+
+    - name: "Habilitar ip http secure-server"
+      cisco.ios.ios_config:
+        lines:
+          - ip http secure-server
+          - ip http authentication local
+
+    - name: "Configurar hostname corporativo"
+      cisco.ios.ios_system:
+        hostname: "{{ cliente.hostname }}"
+
+    - name: "Configurar banner de acceso"
+      cisco.ios.ios_banner:
+        banner: motd
+        text: "{{ router.banner }}"
+        state: present
+
+    - name: "Configurar servidor NTP"
+      cisco.ios.ios_config:
+        lines:
+          - "ntp server {{ router.ntp_server }}"
+
+    - name: "Configurar descripcion interfaz GigabitEthernet1"
+      cisco.ios.ios_interfaces:
+        config:
+          - name: GigabitEthernet1
+            description: "{{ router.descripcion_wan }}"
+        state: merged
+
+    - name: "Crear interfaz Loopback{{ router.loopback_id }} con IP de gestion"
+      cisco.ios.ios_l3_interfaces:
+        config:
+          - name: "Loopback{{ router.loopback_id }}"
+            ipv4:
+              - address: "{{ router.loopback_ip }}/{{ router.loopback_prefix }}"
+        state: merged
+
+    - name: "Activar interfaz Loopback{{ router.loopback_id }}"
+      cisco.ios.ios_interfaces:
+        config:
+          - name: "Loopback{{ router.loopback_id }}"
+            enabled: true
+        state: merged
+
+    - name: "Guardar configuracion en el router"
+      cisco.ios.ios_command:
+        commands:
+          - write memory

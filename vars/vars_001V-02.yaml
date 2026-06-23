@@ -1,0 +1,20 @@
+# vars/vars_001V-02.yaml
+alumno:
+  codigo: "001V-02"
+  nombre: "Benjamin Tomas Araus Ramirez"
+
+cliente:
+  empresa: "Inmobiliaria Central Ltda"
+  hostname: "RTR-INMOCEN"
+
+router:
+  ip: "192.168.56.101"
+  usuario: "cisco"
+  password: "cisco123!"
+  loopback_id: 10
+  loopback_ip: "10.1.2.1"
+  loopback_mask: "255.255.255.0"
+  loopback_prefix: "24"
+  descripcion_wan: "Enlace-WAN-Valparaiso"
+  banner: "ACCESO RESTRINGIDO - INMOCEN"
+  ntp_server: "8.8.8.8"
