@@ -101,7 +101,7 @@ if data_ntp:
     ntp_server  = ntp_block.get("Cisco-IOS-XE-ntp:server", {})
     server_list = ntp_server.get("server-list", [])
     if server_list:
-        actual_ntp = server_list[0].get("ip", "N/A")
+        actual_ntp = server_list[0].get("ip-address", server_list[0].get("ip", "N/A"))
 
 print("=" * 60)
 print("REPORTE DE VALIDACION RESTCONF")

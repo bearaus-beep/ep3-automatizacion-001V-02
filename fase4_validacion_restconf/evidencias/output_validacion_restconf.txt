@@ -1,0 +1,41 @@
+============================================================
+Script      : validacion_restconf.py
+Alumno      : 001V-02
+Fecha/Hora  : 2026-06-24 03:57:19
+Host VM     : labvm
+Router IP   : 192.168.56.105
+============================================================
+
+--- Consultando endpoints RESTCONF ---
+
+[GET] https://192.168.56.105/restconf/data/Cisco-IOS-XE-native:native/hostname
+      Guardado en: evidencias/responses/get_hostname.json
+[GET] https://192.168.56.105/restconf/data/ietf-interfaces:interfaces/interface=Loopback10
+      Guardado en: evidencias/responses/get_loopback.json
+[GET] https://192.168.56.105/restconf/data/ietf-interfaces:interfaces/interface=GigabitEthernet1
+      Guardado en: evidencias/responses/get_interfaces.json
+[GET] https://192.168.56.105/restconf/data/Cisco-IOS-XE-native:native/ntp
+      Guardado en: evidencias/responses/get_ntp.json
+
+============================================================
+REPORTE DE VALIDACION RESTCONF
+============================================================
+[OK]   Hostname corporativo
+       Esperado : RTR-INMOCEN
+       Obtenido : RTR-INMOCEN
+[OK]   IP Loopback10
+       Esperado : 10.1.2.1
+       Obtenido : 10.1.2.1
+[OK]   Descripcion WAN (Gi1)
+       Esperado : Enlace-WAN-Valparaiso
+       Obtenido : Enlace-WAN-Valparaiso
+[OK]   Servidor NTP
+       Esperado : 8.8.8.8
+       Obtenido : 8.8.8.8
+
+Criterios CONFORMES: 4/4
+
+╔══════════════════════════════════╗
+║   RESULTADO GLOBAL: CONFORME     ║
+╚══════════════════════════════════╝
+
