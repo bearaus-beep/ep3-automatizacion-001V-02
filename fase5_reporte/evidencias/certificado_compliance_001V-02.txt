@@ -1,0 +1,36 @@
+
+╔══════════════════════════════════════════════════════════════╗
+║           CERTIFICADO DE COMPLIANCE DE RED                   ║
+║       DRY7122 — Programacion y Redes Virtualizadas           ║
+╚══════════════════════════════════════════════════════════════╝
+
+DATOS DEL ALUMNO
+  Codigo   : 001V-02
+  Nombre   : Benjamin Tomas Araus Ramirez
+
+DATOS DEL PROYECTO
+  Empresa cliente  : Inmobiliaria Central Ltda
+  Hostname router  : RTR-INMOCEN
+  Host VM          : labvm
+  Fecha emision    : 2026-06-24 04:31:50
+
+RESULTADOS DE VALIDACION
+  ┌─────────────────────────────┬─────────────────┐
+  │ Protocolo                   │ Resultado       │
+  ├─────────────────────────────┼─────────────────┤
+  │ NETCONF  (Fase 3 - 5/5 OK)  │ CONFORME        │
+  │ RESTCONF (Fase 4 - 4/4 OK)  │ CONFORME        │
+  │ Diff baseline vs final      │ OK              │
+  └─────────────────────────────┴─────────────────┘
+
+  Detalle diff: 2 archivo(s) de diff generados
+
+══════════════════════════════════════════════════════════════
+  RESULTADO GLOBAL DE COMPLIANCE: CONFORME
+══════════════════════════════════════════════════════════════
+
+Este certificado confirma que el router RTR-INMOCEN de la empresa
+Inmobiliaria Central Ltda ha sido aprovisionado, validado y entregado a
+operaciones en estado OPERATIVO.
+
+Generado automaticamente por generar_certificado.py

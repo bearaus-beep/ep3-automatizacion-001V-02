@@ -1,0 +1,90 @@
+
+Learning '['interface', 'platform', 'routing']' on devices '['CSR1kv']'
+  0%|          | 0/3 [00:00<?, ?it/s] 33%|███▎      | 1/3 [00:01<00:02,  1.01s/it] 67%|██████▋   | 2/3 [00:09<00:03,  3.28s/it]100%|██████████| 3/3 [00:10<00:00,  2.55s/it]100%|██████████| 3/3 [00:10<00:00,  3.48s/it]+==============================================================================+
+| Genie Learn Summary for device CSR1kv                                        |
++==============================================================================+
+|  Connected to CSR1kv                                                         |
+|  -   Log: evidencias/snapshot_final_001V-02/connection_CSR1kv.txt            |
+|------------------------------------------------------------------------------|
+|  Learnt feature 'interface'                                                  |
+|  -  Ops structure:                                                           |
+| evidencias/snapshot_final_001V-02/interface_iosxe_CSR1kv_ops.txt             |
+|  -  Device Console:                                                          |
+| evidencias/snapshot_final_001V-02/interface_iosxe_CSR1kv_console.txt         |
+|------------------------------------------------------------------------------|
+|  Learnt feature 'platform'                                                   |
+|  -  Ops structure:                                                           |
+| evidencias/snapshot_final_001V-02/platform_iosxe_CSR1kv_ops.txt              |
+|  -  Device Console:                                                          |
+| evidencias/snapshot_final_001V-02/platform_iosxe_CSR1kv_console.txt          |
+|------------------------------------------------------------------------------|
+|  Learnt feature 'routing'                                                    |
+|  -  Ops structure:                                                           |
+| evidencias/snapshot_final_001V-02/routing_iosxe_CSR1kv_ops.txt               |
+|  -  Device Console:                                                          |
+| evidencias/snapshot_final_001V-02/routing_iosxe_CSR1kv_console.txt           |
+|==============================================================================|
+
+
+
+
+0it [00:00, ?it/s]1it [00:00, 348.51it/s]+==============================================================================+
+| Genie Diff Summary between directories /home/devasc/ep3-automatizacion-001V-0 |
+| 2/fase1_baseline/evidencias/baseline_001V-02/ and                            |
+| evidencias/snapshot_final_001V-02/                                           |
++==============================================================================+
+|  File: interface_iosxe_CSR1kv_ops.txt                                        |
+|   - Diff can be found at                                                     |
+| evidencias/diff_001V-02/diff_interface_iosxe_CSR1kv_ops.txt                  |
+|------------------------------------------------------------------------------|
+|  File: platform_iosxe_CSR1kv_ops.txt                                         |
+|   - Identical                                                                |
+|------------------------------------------------------------------------------|
+|  File: routing_iosxe_CSR1kv_ops.txt                                          |
+|   - Diff can be found at                                                     |
+| evidencias/diff_001V-02/diff_routing_iosxe_CSR1kv_ops.txt                    |
+|------------------------------------------------------------------------------|
+
+
+==============================================================
+GENERANDO CERTIFICADO DE COMPLIANCE
+==============================================================
+
+
+╔══════════════════════════════════════════════════════════════╗
+║           CERTIFICADO DE COMPLIANCE DE RED                   ║
+║       DRY7122 — Programacion y Redes Virtualizadas           ║
+╚══════════════════════════════════════════════════════════════╝
+
+DATOS DEL ALUMNO
+  Codigo   : 001V-02
+  Nombre   : Benjamin Tomas Araus Ramirez
+
+DATOS DEL PROYECTO
+  Empresa cliente  : Inmobiliaria Central Ltda
+  Hostname router  : RTR-INMOCEN
+  Host VM          : labvm
+  Fecha emision    : 2026-06-24 04:31:50
+
+RESULTADOS DE VALIDACION
+  ┌─────────────────────────────┬─────────────────┐
+  │ Protocolo                   │ Resultado       │
+  ├─────────────────────────────┼─────────────────┤
+  │ NETCONF  (Fase 3 - 5/5 OK)  │ CONFORME        │
+  │ RESTCONF (Fase 4 - 4/4 OK)  │ CONFORME        │
+  │ Diff baseline vs final      │ OK              │
+  └─────────────────────────────┴─────────────────┘
+
+  Detalle diff: 2 archivo(s) de diff generados
+
+══════════════════════════════════════════════════════════════
+  RESULTADO GLOBAL DE COMPLIANCE: CONFORME
+══════════════════════════════════════════════════════════════
+
+Este certificado confirma que el router RTR-INMOCEN de la empresa
+Inmobiliaria Central Ltda ha sido aprovisionado, validado y entregado a
+operaciones en estado OPERATIVO.
+
+Generado automaticamente por generar_certificado.py
+
+[INFO] Certificado guardado en: evidencias/certificado_compliance_001V-02.txt
