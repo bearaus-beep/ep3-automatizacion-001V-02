@@ -1,6 +1,6 @@
 # EP3 — Implementación de Automatización de Red con Compliance Auditado
 
-**Alumno:** 001V-02  
+**Alumno:** 001V-02 Benjamin Araus
 **Curso:** DRY7122 — Programación y Redes Virtualizadas (SDN-NFV)  
 **Institución:** DUOC UC — Escuela de Informática y Telecomunicaciones  
 
