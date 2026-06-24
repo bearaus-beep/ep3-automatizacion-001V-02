@@ -1,0 +1,38 @@
+============================================================
+Script      : validacion_netconf.py
+Alumno      : 001V-02
+Fecha/Hora  : 2026-06-24 03:48:24
+Host VM     : labvm
+Router IP   : 192.168.56.105
+============================================================
+
+[INFO] Conectando al router 192.168.56.105 via NETCONF puerto 830...
+[INFO] Sesion NETCONF establecida correctamente.
+
+[INFO] XML guardado en: evidencias/rpc_reply_raw.xml
+
+============================================================
+REPORTE DE VALIDACION NETCONF
+============================================================
+[OK]   Hostname corporativo
+       Esperado : RTR-INMOCEN
+       Obtenido : RTR-INMOCEN
+[OK]   IP Loopback10
+       Esperado : 10.1.2.1
+       Obtenido : 10.1.2.1
+[OK]   Mascara Loopback10
+       Esperado : 255.255.255.0
+       Obtenido : 255.255.255.0
+[OK]   Descripcion WAN (Gi1)
+       Esperado : Enlace-WAN-Valparaiso
+       Obtenido : Enlace-WAN-Valparaiso
+[OK]   Servidor NTP
+       Esperado : 8.8.8.8
+       Obtenido : 8.8.8.8
+
+Criterios CONFORMES: 5/5
+
+╔══════════════════════════════════╗
+║   RESULTADO GLOBAL: CONFORME     ║
+╚══════════════════════════════════╝
+

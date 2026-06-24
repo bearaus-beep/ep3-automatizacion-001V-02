@@ -13,7 +13,6 @@ from ncclient import manager
 from lxml import etree
 import yaml
 
-# Cargar variables
 VARS_PATH = os.path.join(os.path.dirname(__file__), "..", "vars", "vars_001V-02.yaml")
 with open(VARS_PATH, "r") as f:
     vars_data = yaml.safe_load(f)
@@ -32,7 +31,6 @@ ALUMNO            = vars_data["alumno"]["codigo"]
 EVIDENCIAS_DIR = os.path.join(os.path.dirname(__file__), "evidencias")
 os.makedirs(EVIDENCIAS_DIR, exist_ok=True)
 
-# Metadatos
 print("=" * 60)
 print(f"Script      : validacion_netconf.py")
 print(f"Alumno      : {ALUMNO}")
@@ -56,11 +54,7 @@ NETCONF_FILTER = """
         <ip/>
       </Loopback>
     </interface>
-    <ntp>
-      <server xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ntp">
-        <server-list/>
-      </server>
-    </ntp>
+    <ntp/>
   </native>
 </filter>
 """
@@ -101,9 +95,11 @@ try:
         root = etree.fromstring(xml_raw.encode("utf-8"))
         data = root.find(".//ios:native", ns)
 
+        # Hostname
         hostname_el = data.find("ios:hostname", ns)
         actual_hostname = hostname_el.text.strip() if hostname_el is not None else "N/A"
 
+        # Loopback IP y mascara
         actual_loopback_ip   = "N/A"
         actual_loopback_mask = "N/A"
         for lb in data.findall(".//ios:interface/ios:Loopback", ns):
@@ -114,6 +110,7 @@ try:
                 if ip_el   is not None: actual_loopback_ip   = ip_el.text.strip()
                 if mask_el is not None: actual_loopback_mask = mask_el.text.strip()
 
+        # Descripcion WAN
         actual_desc_wan = "N/A"
         for gig in data.findall(".//ios:interface/ios:GigabitEthernet", ns):
             gig_name = gig.find("ios:name", ns)
@@ -122,12 +119,30 @@ try:
                 if desc_el is not None:
                     actual_desc_wan = desc_el.text.strip()
 
+        # NTP — buscar en multiples rutas posibles
         actual_ntp = "N/A"
-        for srv in data.findall(".//ntp:server/ntp:server-list", ns):
-            ip_el = srv.find("ntp:ip", ns)
-            if ip_el is not None:
-                actual_ntp = ip_el.text.strip()
-                break
+        ntp_el = data.find(".//ios:ntp", ns)
+        if ntp_el is not None:
+            # Ruta 1: ntp/server/server-list con namespace ntp
+            for srv in ntp_el.findall(".//ntp:server-list", ns):
+                ip_el = srv.find("ntp:ip", ns)
+                if ip_el is not None:
+                    actual_ntp = ip_el.text.strip()
+                    break
+            # Ruta 2: sin namespace especifico
+            if actual_ntp == "N/A":
+                for srv in ntp_el.iter():
+                    if srv.tag.endswith("ip") and srv.text:
+                        actual_ntp = srv.text.strip()
+                        break
+            # Ruta 3: buscar cualquier elemento con ip dentro de ntp
+            if actual_ntp == "N/A":
+                for child in ntp_el.iter():
+                    tag = child.tag.split("}")[-1] if "}" in child.tag else child.tag
+                    if tag == "ip-address" or tag == "ip":
+                        if child.text and child.text.strip():
+                            actual_ntp = child.text.strip()
+                            break
 
         print("=" * 60)
         print("REPORTE DE VALIDACION NETCONF")
@@ -143,11 +158,11 @@ try:
             print(f"       Obtenido : {obtenido}")
             resultados.append(ok)
 
-        check("Hostname corporativo",  EXP_HOSTNAME,     actual_hostname)
-        check("IP Loopback10",         EXP_LOOPBACK_IP,  actual_loopback_ip)
-        check("Mascara Loopback10",    EXP_LOOPBACK_MASK,actual_loopback_mask)
-        check("Descripcion WAN (Gi1)", EXP_DESC_WAN,     actual_desc_wan)
-        check("Servidor NTP",          EXP_NTP,          actual_ntp)
+        check("Hostname corporativo",  EXP_HOSTNAME,      actual_hostname)
+        check("IP Loopback10",         EXP_LOOPBACK_IP,   actual_loopback_ip)
+        check("Mascara Loopback10",    EXP_LOOPBACK_MASK, actual_loopback_mask)
+        check("Descripcion WAN (Gi1)", EXP_DESC_WAN,      actual_desc_wan)
+        check("Servidor NTP",          EXP_NTP,           actual_ntp)
 
         print()
         aprobados = sum(resultados)

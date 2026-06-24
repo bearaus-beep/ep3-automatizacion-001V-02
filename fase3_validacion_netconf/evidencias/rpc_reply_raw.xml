@@ -1,0 +1,31 @@
+<rpc-reply xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0" message-id="urn:uuid:431a7f7f-653a-4e8d-a500-eef033d37e2a">
+  <data>
+    <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+      <hostname>RTR-INMOCEN</hostname>
+      <interface>
+        <GigabitEthernet>
+          <name xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">1</name>
+          <description>Enlace-WAN-Valparaiso</description>
+        </GigabitEthernet>
+        <Loopback>
+          <name>10</name>
+          <ip>
+            <address>
+              <primary>
+                <address>10.1.2.1</address>
+                <mask>255.255.255.0</mask>
+              </primary>
+            </address>
+          </ip>
+        </Loopback>
+      </interface>
+      <ntp>
+        <server xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ntp">
+          <server-list>
+            <ip-address>8.8.8.8</ip-address>
+          </server-list>
+        </server>
+      </ntp>
+    </native>
+  </data>
+</rpc-reply>
