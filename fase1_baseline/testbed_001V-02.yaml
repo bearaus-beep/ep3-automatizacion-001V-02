@@ -8,6 +8,8 @@ devices:
         password: cisco123!
     connections:
       cli:
-        protocol: ssh -o KexAlgorithms=diffie-hellman-group14-sha1
+        protocol: ssh
         ip: 192.168.56.105
         port: 22
+        arguments:
+          ssh_options: "-o KexAlgorithms=diffie-hellman-group14-sha1 -o StrictHostKeyChecking=no"
