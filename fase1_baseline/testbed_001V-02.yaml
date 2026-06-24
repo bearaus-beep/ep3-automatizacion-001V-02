@@ -9,5 +9,5 @@ devices:
     connections:
       cli:
         protocol: ssh -o KexAlgorithms=diffie-hellman-group14-sha1
-        ip: 192.168.56.101
+        ip: 192.168.56.105
         port: 22
